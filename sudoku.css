@@ -1,0 +1,105 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Calibri, sans-serif; 
+}
+body {
+    background: rgba(50,50,50,1);
+}
+.regular_button, .highlighted_button, .share_button, .activated_share {
+    font-weight: bold;
+    background: black;
+    color: rgba(120,120,120,1);
+    border-radius: 9px;
+    border: 1px solid rgba(255,137,0,0.2);
+    margin: 1px;
+    margin-right = 8px;
+    box-shadow: 2px 2px 5px 0 rgba(200,200,200,.3); /* Add a shadow to the button */
+
+}
+.highlighted_button {
+    background: rgba(230,230,230,1);
+    color: black;
+}
+.share_button, .activated_share {
+    background: rgb(40,40,40);
+    margin-top: 6px;
+}
+.activated_share {
+    background: rgb(80,80,80);
+    color: black;
+}
+table { 
+    border-collapse: collapse; 
+    table-layout: fixed;
+}
+colgroup, tbody { 
+    border: solid medium rgb(18, 70, 105); 
+}
+td { 
+    border: solid thin rgb(18, 70, 105);
+    text-align: center; 
+    padding: 2px; 
+}
+caption {
+  color: white;
+  margin-bottom: 7px;
+  font-size: 20px;
+}
+th {
+    background: rgba(255,137,0,0.9);
+    padding: 10px 20px;
+    color: rgba(129, 69, 0, 1);
+}
+th:first-child {
+    border-top-left-radius: 5px;
+}
+th:last-child {
+    border-top-right-radius: 5px;
+    border-right: none;
+}
+tr:last-child td:first-child {
+    border-radius: 0 0 0 5px;
+}
+tr:last-child td:last-child {
+    border-radius: 0 0 5px 0;
+}
+tr td:last-child {
+    border-right: none;
+}
+.s_colgroup, .s_tbody { 
+    border: solid medium rgb(18, 70, 105); 
+}
+.number_box {
+    color: rgb(88, 140, 185);
+    background-color: white;
+    text-align: center;
+}
+.msg {
+    color: rgb(200,200,200);
+    text-align: center;
+    border-radius: 5px;
+    padding: 3px;
+}    
+.title {
+    font-size: 10em;
+    text-align: center;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.game_bg_img {
+    background-image: url('./img/bg2.png');
+    background-color: #323232;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.all_numbers_completed {
+    background-color: grey;
+}
+.active_numbers:hover {
+    color: rgba(255,137,0,1);
+}

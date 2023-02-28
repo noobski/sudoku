@@ -1,0 +1,33 @@
+<html>
+<head><link rel="stylesheet" href="sudoku.css"></head>
+<body>
+    <span id='lobby' class="wrapper">
+        <h1 class='title' style='font-family: times new roman'>SudoBom</h1>
+        <div style='font-size: 0.5em; color: grey'>* High scores are reset every Sunday morning</div>
+        <table id='high_scores_table'></table><br>
+        <div id='countdown_timer' class='msg'></div><br>
+        <span id='lobby_buttons'></span><br>
+        <table id='waiting_players'></table>
+        <div id='now_playing' class='msg'></div>
+    </span>
+    <span id='game' class="wrapper" >
+        <span id='sudoku_container'></span><br>
+        <span id='numbers_container'></span><br>
+        <div id='timer_container' class='msg'></div><br>
+        <span id='game_buttons'></span><br>
+        <table id='players_table' ></table><br>
+    </span>
+    <br>
+    <span class='wrapper' height='10vh'>
+        <span id='msg' class='msg'></span>
+        <span id='games_to_date' class='msg'></span>
+    </span>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js'></script>
+<!-- <script src='../lib/external_libs/socket_4_5_1/socket.io.js'></script> -->
+<script src='comms.js'></script>
+<script src='players.js'></script>
+<script src='game.js'></script>
+<script src='board.js'></script>
+<script src='sudoku.js'></script>
+</body>
+</html>
