@@ -1,3 +1,5 @@
+/* global Board Players Comms */
+// eslint-disable-next-line no-unused-vars
 class Game {
 	constructor(){
 		// user name
@@ -54,7 +56,7 @@ class Game {
 		if(user && user !='null' && !change)
 			return user;
 		// prompt user for username
-		let new_user = window.prompt('How do you want to be known?');
+		const new_user = window.prompt('How do you want to be known?');
 		// pressing 'enter' keeps the old user name (if exists)
 		if(new_user == 'null' && user && user != 'null')
 			return user;

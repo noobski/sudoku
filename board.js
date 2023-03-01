@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-magic-numbers */
+/* global running_local */
 class Board{
 	constructor(){
 		// check if running on mobile device that requires resizing of board
@@ -5,7 +8,7 @@ class Board{
 		// accomodate mobile
 		this.cell_w = this.using_mobile ? (window.innerWidth-30)/9 : 49; //grid cells
 		this.t_cell_h = this.cell_w*0.7; // table row height
-		let fs = this.font_size = this.cell_w*0.4; // default font size
+		const fs = this.font_size = this.cell_w*0.4; // default font size
 		[...document.getElementsByClassName('msg')].forEach(e =>
 			e.style.fontSize=fs);
 		this.msg(''); // so that the little dot from border radius doesn't show
@@ -15,17 +18,17 @@ class Board{
 	}
 	create_lobby_buttons(){
 		// level and start
-		let e = document.getElementById('lobby_buttons');
+		const e = document.getElementById('lobby_buttons');
 		['Easy', 'Medium', 'Hard', 'Start!'].forEach(l => {
-			let btn = create_element('button', {innerHTML: l, style: 'height:'+
+			const btn = create_element('button', {innerHTML: l, style: 'height:'+
 				this.t_cell_h+'; width:'+this.t_cell_h*2.2+'; font-size:'+
 				this.font_size, class: 'regular_button', dataset: {clicked: 'false'}});
 			btn.onclick = (e) => {
-				let b = e.srcElement;
-				let clicked = b.dataset.clicked=='true';
+				const b = e.srcElement;
+				const clicked = b.dataset.clicked=='true';
 				this.lobby_buttons_remove_highlight();
 				clicked ? '' : b.classList.add('highlighted_button');
-				let action = clicked ? '(reset)' : l.toLowerCase();
+				const action = clicked ? '(reset)' : l.toLowerCase();
 				b.dataset.clicked = !clicked;
 				game.comms.send_desired_level(action);
 			};
@@ -39,20 +42,20 @@ class Board{
 		});
 		e.appendChild(create_element('br'));
 		// share buttons
-		let btn = create_element('button', {innerHTML: 'Invite a friend', 
+		const btn = create_element('button', {innerHTML: 'Invite a friend',
 			style: 'height:'+this.t_cell_h+'; width:'+this.t_cell_h*9+
 			'; font-size:'+this.font_size, class:'share_button'});
-		let msg = 'I challenge you to Sudoku at http://poco.la/sudoku !';
-		btn.onclick = (e) => 
+		const msg = 'I challenge you to Sudoku at http://poco.la/sudoku !';
+		btn.onclick = (e) =>
 			this.using_mobile ? this.mobile_share(e, msg) : this.pc_share(e, msg);
 		e.appendChild(btn);
 	}
 	mobile_share(e, msg){
-		let url = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(msg);
-		window.location.href = url; 
+		const url = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(msg);
+		window.location.href = url;
 	}
 	pc_share(e, msg){
-		var tempInput = document.createElement('input');
+		const tempInput = document.createElement('input');
 		tempInput.style = 'position: absolute; left: -1000px; top: -1000px';
 		tempInput.value = msg;
 		document.body.appendChild(tempInput);
@@ -63,17 +66,17 @@ class Board{
 		e.srcElement.innerHTML = 'Paste copied message in Whatsapp';
 	}
 	lobby_buttons_remove_highlight(){
-		document.querySelectorAll('button').forEach(button => { 
+		document.querySelectorAll('button').forEach(button => {
 			button.classList.remove('highlighted_button');
 			button.dataset.clicked='false';
 		});
 	}
 	create_game_buttons(){
-		let e = document.getElementById('game_buttons');
-		let btn = create_element('button', {style: 'height:'+this.t_cell_h+
+		const e = document.getElementById('game_buttons');
+		const btn = create_element('button', {style: 'height:'+this.t_cell_h+
 			'; width:'+this.t_cell_h*4+'; font-size:'+this.font_size+';',
-			innerHTML: 'Quit', class: 'regular_button'});
-		btn.onclick = ()=> {   
+		innerHTML: 'Quit', class: 'regular_button'});
+		btn.onclick = ()=> {
 			btn.innerHTML = btn.innerHTML=='Quit' ? 'Back to lobby' : 'Quit';
 			game.game_button_pressed();
 		};
@@ -88,7 +91,7 @@ class Board{
 		if(running_local) // make 'true' to test end of game
 		{
 			// create board that is missing only one number, and print it
-			this.show = Array(9).fill().map(x => (Array(9).fill().map(x => 1)));
+			this.show = Array(9).fill().map(() => (Array(9).fill().map(() => 1)));
 			this.show[1][1] = 0;
 			this.show[1][0] = 0;
 		}
@@ -105,47 +108,47 @@ class Board{
 		});
 	}
 	create_sudoku_grid(){
-		let container = document.getElementById('sudoku_container');
+		const container = document.getElementById('sudoku_container');
 		container.innerHTML = '';
 		// create new grid
-		let table_e = create_element('table', {id: 'sudoku_table'});
+		const table_e = create_element('table', {id: 'sudoku_table'});
 		container.appendChild(table_e);
 		// create top caption
-		table_e.appendChild(create_element('caption', 
-			{innerHTML: game.level.toUpperCase(), 
-			 style: 'font-size: '+this.font_size}));
+		table_e.appendChild(create_element('caption',
+			{innerHTML: game.level.toUpperCase(),
+				style: 'font-size: '+this.font_size}));
 		// create the cells of the table (by 3 colgroups separately)
 		for(let i=0; i<3; i++)
 		{
-			let colgroup_e = create_element('colgroup', {className: 's_colgroup'});
+			const colgroup_e = create_element('colgroup', {className: 's_colgroup'});
 			for(let j=0; j<3; j++)
 				colgroup_e.appendChild(create_element('col'));
 			table_e.appendChild(colgroup_e);
 		}
 		for(let b=0; b<3; b++)
 		{
-			let body_e = create_element('tbody', {className: 's_tbody'});
+			const body_e = create_element('tbody', {className: 's_tbody'});
 			table_e.appendChild(body_e);
 			for(let r=0; r<3; r++)
 			{
-				let row_e = create_element('tr');
+				const row_e = create_element('tr');
 				body_e.appendChild(row_e);
 				for(let t=0; t<9; t++)
 				{
 					// Sudoku grid cell defined here
-					let row = r+b*3, col = t;
-					let w = this.cell_w;
-					let fs = this.font_size*1.65;
-					let style = 'width:'+w+'px; height:'+w+'px; font-size:'+fs+'px';
-					let td_e = create_element('td', 
+					const row = r+b*3, col = t;
+					const w = this.cell_w;
+					const fs = this.font_size*1.65;
+					const style = 'width:'+w+'px; height:'+w+'px; font-size:'+fs+'px';
+					const td_e = create_element('td',
 						{className: 'number_box', style: style, innerHTML:
-						 this.show[row][col] ? this.a[row][col] : '',
-						 id: String(row)+String(col)});
+						this.show[row][col] ? this.a[row][col] : '',
+						id: String(row)+String(col)});
 					td_e.onclick = (e) => {
 						e.preventDefault();
 						this.cell_clicked(td_e, row, col);
 					};
-					td_e.onmouseover = (e) =>         
+					td_e.onmouseover = (e) =>
 						e.srcElement.style.backgroundColor = 'rgb(235,235,235)';
 					td_e.onmouseout = () => this.reset_all_cell_backgrounds();
 					row_e.appendChild(td_e);
@@ -154,23 +157,23 @@ class Board{
 		}
 	}
 	create_active_numbers_bar(){
-		let container = document.getElementById('numbers_container');
+		const container = document.getElementById('numbers_container');
 		container.innerHTML = ''; // erase previous
 		this.active_numbers = [];
-		let table_numbers_e = create_element('table');
+		const table_numbers_e = create_element('table');
 		table_numbers_e.style.backgroundColor='white'; // transparent hover...
 		table_numbers_e.style.border = 'solid medium rgb(18,70,105)';
 		container.appendChild(table_numbers_e);
-		let tr_e = create_element('tr');
+		const tr_e = create_element('tr');
 		table_numbers_e.appendChild(tr_e);
 		for(let t=1; t<10; t++)
 		{
 			// active number cell created here
-			let w = this.cell_w*1.01;
-			let fs = this.font_size*1.65;
-			let style = 'width:'+w+'px; height:'+w+'px; font-size:'+fs+'px';
-			let count = this.count_number_showings(t);
-			let td_e = create_element('td', {className: 'number_box',
+			const w = this.cell_w*1.01;
+			const fs = this.font_size*1.65;
+			const style = 'width:'+w+'px; height:'+w+'px; font-size:'+fs+'px';
+			const count = this.count_number_showings(t);
+			const td_e = create_element('td', {className: 'number_box',
 				id: 'active'+t, innerHTML: count==9 ? '.' : t, style: style});
 			td_e.onclick = () => this.active_number_clicked(t);
 			tr_e.appendChild(td_e);
@@ -178,32 +181,32 @@ class Board{
 		}
 	}
 	show_games_played(games){
-		document.getElementById('games_to_date').innerHTML = 
+		document.getElementById('games_to_date').innerHTML =
 			'Games played to date: '+games;
 	}
 	show_rivals_table(rivals){ // during the game
 		// find the rivals table
-		let table = document.getElementById('players_table');
+		const table = document.getElementById('players_table');
 		table.width = this.cell_w*9.5;
 		table.innerHTML = '';
 		// create header row
-		let header_r = create_element('tr');
+		const header_r = create_element('tr');
 		table.appendChild(header_r);
 		['Player', 'Squares left', 'Strikes'].forEach((t) => {
-			header_r.appendChild(create_element('th', 
+			header_r.appendChild(create_element('th',
 				{className: 'player_name',
-				 style: ('height: '+this.t_cell_h+'; font-size: '+this.font_size),
-				 innerHTML: t}));
-		}); 
+					style: ('height: '+this.t_cell_h+'; font-size: '+this.font_size),
+					innerHTML: t}));
+		});
 		// populate the table with the players
 		rivals.forEach((p, i) => {
 			p.sq_left = p.sq_left!=null ? p.sq_left : this.squares_left();
 			p.strikes = p.strikes!=null ? p.strikes : 0;
-			let row = create_element('tr', {style: 'background-color: white'});
+			const row = create_element('tr', {style: 'background-color: white'});
 			table.appendChild(row);
 			// content of each player's row
 			[p.username, p.sq_left, p.strikes].forEach(t => {
-				let cell = create_element('td', 
+				const cell = create_element('td',
 					{style: 'height: '+this.cell_w*0.7+'; font-size: '
 					+this.cell_w*0.4+'; background: '+(p.strikes<3 ? 'rgb(230,230,230)' : 'red'), innerHTML: t});
 				if(p.username==game.username)
@@ -211,50 +214,49 @@ class Board{
 					// highlight this player's entry differently
 					cell.style.background = 'rgba(255,137,0,0.4)';
 					// if this player is leading, highlight board in green
-					document.getElementById('sudoku_table').style.border = 
-					   '8px solid '+(i==0 && rivals.length>1 && 
-					   rivals[i+1].sq_left > p.sq_left ? 'lightgreen' : '');
+					document.getElementById('sudoku_table').style.border =
+						'8px solid '+(i==0 && rivals.length>1 &&
+						rivals[i+1].sq_left > p.sq_left ? 'lightgreen' : '');
 				}
 				row.appendChild(cell);
 			});
 		});
 	}
 	show_waiting_players_in_lobby(waiting_players){
-		let t, header_row;
-		t = document.getElementById('waiting_players');
+		const t = document.getElementById('waiting_players');
 		t.innerHTML = '';
 		t.style.width = this.cell_w*9;
 		// create header row
-		header_row = create_element('tr');
+		const header_row = create_element('tr');
 		t.appendChild(header_row);
 		['Player', 'Level?', 'Easy', 'Medium', 'Hard'].forEach((t) => {
-			header_row.appendChild(create_element('th', {innerHTML: t, style: 
+			header_row.appendChild(create_element('th', {innerHTML: t, style:
 				'height: '+this.t_cell_h+'; font-size: '+this.font_size}));
 		});
 		// populate the table with the players
 		waiting_players.forEach(p => {
-			let row = create_element('tr', {style: 'background-color: white'});
+			const row = create_element('tr', {style: 'background-color: white'});
 			t.appendChild(row);
 			// create scores object (easy, medium, high)
-			let scores_o = {easy: '-', medium: '-', hard: '-'};
+			const scores_o = {easy: '-', medium: '-', hard: '-'};
 			p.scores.forEach(s=> scores_o[s.level] = s.score);
-			[p.username, p.desired_level, scores_o.easy, scores_o.medium, 
-			 scores_o.hard].forEach(t => {
-				let style = 'padding: 5px 5px; color: rgba(0, 0, 0, 0.6); height:'
+			[p.username, p.desired_level, scores_o.easy, scores_o.medium,
+				scores_o.hard].forEach(t => {
+				const style = 'padding: 5px 5px; color: rgba(0, 0, 0, 0.6); height:'
 					+ this.t_cell_h+'; font-size:'+this.font_size +
 					'; font-align: center; background: '+
-					(p.username==game.username ? 
-					'rgba(255,137,0,0.4)' : 'rgb(230,230,230)') + 
+					(p.username==game.username ?
+						'rgba(255,137,0,0.4)' : 'rgb(230,230,230)') +
 					'; font-weight: '+ (t==game.user.desired_level ? 'bold':'');
-				let content = t==p.desired_level && t ? t[0].toUpperCase()+t.slice(1) : t;
-				row.appendChild(create_element('td', 
+				const content = t==p.desired_level && t ? t[0].toUpperCase()+t.slice(1) : t;
+				row.appendChild(create_element('td',
 					{innerHTML: content, style: style}));
 			});
 		});
 	}
 	show_high_scores(high_scores){
 		['easy', 'medium', 'hard'].forEach(l => {
-			let hs = (high_scores && high_scores.find(s=>s.level == l));
+			const hs = (high_scores && high_scores.find(s=>s.level == l));
 			if(!hs)
 				return;
 			document.getElementById(l+'_username').innerHTML = hs['username'];
@@ -262,20 +264,20 @@ class Board{
 		});
 	}
 	create_high_score_list(){
-		let t = document.getElementById('high_scores_table');
+		const t = document.getElementById('high_scores_table');
 		t.style.width = this.cell_w*9;
 		// create table header row
-		let r = create_element('tr');
+		const r = create_element('tr');
 		['Level', 'Name', 'High score'].forEach(label => {
-			r.appendChild(create_element('th', {innerHTML: label, style: 
+			r.appendChild(create_element('th', {innerHTML: label, style:
 			'height:'+this.t_cell_h+'; font-size:'+this.font_size}));
 		});
 		t.appendChild(r);
 		// add high scores rows to table
 		['easy', 'medium', 'hard'].forEach(l => {
-			let tr = create_element('tr', {id: l});
+			const tr = create_element('tr', {id: l});
 			['level', 'username', 'score'].forEach(key => {
-				tr.appendChild(create_element('td', {id: l+'_'+key, innerHTML: 
+				tr.appendChild(create_element('td', {id: l+'_'+key, innerHTML:
 				key=='level' ? l:'', style: 'padding: 7px 20px; background: rgba(230,230,230,1); color: rgba(0, 0, 0, 0.6); height: '+
 				this.t_cell_h+'; font-size:'+this.font_size}));
 			});
@@ -283,7 +285,7 @@ class Board{
 		});
 	}
 	cell_clicked(e, row, col){
-		let strike = this.strike_cells[0];
+		const strike = this.strike_cells[0];
 		this.erase_strike_cells();
 		if(!this.active_number)
 			return;
@@ -291,7 +293,7 @@ class Board{
 		{
 			// clicked on showing cell => change active number
 			this.active_number = this.a[row][col];
-		} 
+		}
 		else if(this.a[row][col] == this.active_number)
 		{
 			// correct guess
@@ -299,21 +301,21 @@ class Board{
 			e.innerHTML = this.active_number;
 			this.show[row][col] = 1;
 			if(this.count_number_showings(this.active_number)==9)
-			{   
+			{
 				// finished all of this number on the board
 				this.active_numbers[this.active_number].innerHTML = '.';
 				document.body.className = 'all_numbers_completed'; // blink
 				setTimeout(()=>document.body.className = 'game_bg_img', 250);
 			}
-		} 
-		else 
+		}
+		else
 		{
 			// incorrect guess
 			if(e == strike)
 				return; // only mark strike if first strike on current cell
 			e.style.color = 'red';
 			e.innerHTML = this.active_number;
-			this.strike_cells.push(e); 
+			this.strike_cells.push(e);
 			this.strikes++;
 		}
 		this.reset_all_cell_backgrounds();
@@ -325,11 +327,11 @@ class Board{
 		this.strike_cells = [];
 	}
 	show_countdown(time){
-		document.getElementById('countdown_timer').innerHTML = 
+		document.getElementById('countdown_timer').innerHTML =
 			'Next game in: '+time+' seconds';
 	}
 	show_now_playing(now_playing){
-		let e = document.getElementById('now_playing');
+		const e = document.getElementById('now_playing');
 		if(!now_playing.length)
 		{
 			e.innerHTML='';
@@ -341,7 +343,7 @@ class Board{
 	active_number_clicked(num){
 		// reset cells and highlight the new active number
 		this.erase_strike_cells();
-		this.reset_all_cell_backgrounds(num); 
+		this.reset_all_cell_backgrounds(num);
 	}
 	timer_start(){
 		this.timer_stop();
@@ -354,24 +356,24 @@ class Board{
 	}
 	timer_draw(){
 		let s = (new Date() - this.timer_start_time)/1000;
-		let m = String(Math.floor(s/60));
+		const m = String(Math.floor(s/60));
 		s = Math.round(s-m*60);
 		s = s<10 ? '0'+String(s) : String(s);
-		let e = document.getElementById('timer_container');
+		const e = document.getElementById('timer_container');
 		e.style.fontSize = this.font_size;
 		e.innerHTML = m+':'+s;
 	}
 	reset_all_cell_backgrounds(n = this.active_number){
 		this.active_number = n;
 		// remove highlight from all active numbers & highlight the one active
-		this.active_numbers.forEach((e,i) => 
+		this.active_numbers.forEach((e,i) =>
 			e.style.backgroundColor = i==n ? 'rgba(58, 110, 145, 0.4)' : 'white');
 		// highlight all 'shown' numbers that are the new active_number
 		for(let r=0; r<9; r++)
 			for(let c=0; c<9; c++)
 			{
-				let e = document.getElementById(String(r)+String(c));
-				e.style.backgroundColor = (this.a[r][c]==this.active_number && 
+				const e = document.getElementById(String(r)+String(c));
+				e.style.backgroundColor = (this.a[r][c]==this.active_number &&
 					this.show[r][c]) ? 'lightgrey' : 'white';
 			}
 	}
@@ -386,14 +388,14 @@ class Board{
 		return this.show.flat().filter(x => x==0).length;
 	}
 	msg(txt){
-		let e = document.getElementById('msg');
+		const e = document.getElementById('msg');
 		e.innerHTML = txt;
 		e.style.display = txt=='' ? 'none' : 'inline';
 	}
 	game_over(win, txt){
 		this.timer_stop();
 		// change board color & msg user
-		[...document.getElementsByClassName('number_box')].forEach(e => 
+		[...document.getElementsByClassName('number_box')].forEach(e =>
 		{
 			e.style.backgroundColor = win ? 'lightgreen' : 'pink';
 			e.onclick = null;
@@ -404,13 +406,13 @@ class Board{
 	}
 }
 function create_element(tag, attributes) {
-	var element = document.createElement(tag);
-	for (var attribute in attributes) 
+	const element = document.createElement(tag);
+	for (const attribute in attributes)
 	{
-		attribute=='innerHTML' ? element.innerHTML = attributes[attribute] : 
+		attribute=='innerHTML' ? element.innerHTML = attributes[attribute] :
 			attribute=='className' ? element.className = attributes[attribute] :
-			element.setAttribute(attribute, attributes[attribute]);
+				element.setAttribute(attribute, attributes[attribute]);
 	}
 	return element;
 }
-// 361 - 353 
+// 361 - 353
