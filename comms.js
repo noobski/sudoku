@@ -1,4 +1,4 @@
-const running_local = true; // read this from a local file in the future // network
+const running_local = false; // read this from a local file in the future // network
 const sudoku_server = running_local ? 'ws://localhost:3100' : 'http://poco.la:3100';
 // *** Also need to:
 // . upload /lib/game_lobby and /lib/user_db_client to server
