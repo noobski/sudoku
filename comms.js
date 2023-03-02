@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const running_local = false; // read this from a local file in the future // network
 const sudoku_server = running_local ? 'ws://localhost:3100' : 'http://poco.la:3100';
 // *** Also need to:
@@ -10,10 +11,11 @@ const sudoku_server = running_local ? 'ws://localhost:3100' : 'http://poco.la:31
   -> 'start' (tell all players that game has started, and only then create the board
   -> 'board' (send mine to server upon changes)
 */
-/* global Comms */
+// eslint-disable-next-line no-unused-vars
 class Comms {
 	constructor(g){
 		// connect to server
+		// eslint-disable-next-line no-undef
 		this.s = io.connect(sudoku_server);
 		const s = this.s;
 		s.on('connect_error', (err) =>
