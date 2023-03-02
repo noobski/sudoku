@@ -1,4 +1,4 @@
-/* global Board Players Comms */
+/* global Board Players Comms Chat */
 // eslint-disable-next-line no-unused-vars
 class Game {
 	constructor(){
@@ -13,7 +13,8 @@ class Game {
 		// set initial game state
 		this.set_state('waiting');
 		// start chat
-		new Chat(document.getElementById('chat'), 'sudoku', this.username);
+		new Chat(document.getElementById('chat_input'), document.getElementById('chat_output'),
+			'sudoku', this.username);
 	}
 	game_over(win, txt=''){
 		this.set_state('game_over');
