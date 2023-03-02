@@ -12,6 +12,8 @@ class Game {
 		this.board = new Board(this);
 		// set initial game state
 		this.set_state('waiting');
+		// start chat
+		new Chat(document.getElementById('chat'), 'sudoku', this.username);
 	}
 	game_over(win, txt=''){
 		this.set_state('game_over');
