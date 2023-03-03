@@ -6,7 +6,7 @@
 body {
     background: rgba(50,50,50,1);
 }
-.regular_button, .highlighted_button, .share_button, .activated_share {
+.regular_button, .highlighted_button, .share_button, .activated_share, ul {
     font-weight: bold;
     background: black;
     color: rgba(120,120,120,1);
@@ -46,7 +46,7 @@ caption {
   margin-bottom: 7px;
   font-size: 20px;
 }
-th {
+th, input {
     background: rgba(255,137,0,0.9);
     padding: 10px 20px;
     color: rgba(129, 69, 0, 1);

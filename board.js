@@ -21,12 +21,12 @@ class Board{
 		const chat_container = document.getElementById('chat_container');
 		const chat_input = document.createElement('input');
 		const chat_output = document.createElement('ul');
-		chat_input.style.width = this.cell_w*9;
-		chat_input.style.height = this.cell_w*1;
-		chat_input.style.fontSize = this.font_size;
-		chat_output.style.width = this.cell_w*9;
-		chat_output.style.height = this.cell_w*4;
-		chat_output.style.fontSize = this.font_size;
+		[chat_input, chat_output].forEach((e, i) => {
+			chat_container.appendChild(e);
+			chat_input.style.width = this.cell_w*9;
+			chat_input.style.height = this.cell_w*(i==1 ? 1:3);
+			chat_input.style.fontSize = this.font_size;
+		});
 		new Chat(chat_input, chat_output, 'sudoku', this.username);
 	}
 	create_lobby_buttons(){
