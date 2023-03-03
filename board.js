@@ -28,7 +28,7 @@ class Board{
 			e.style.height = this.cell_w*(i==0 ? 1:3);
 			e.style.fontSize = this.font_size;
 		});
-		new Chat(chat_input, chat_output, 'sudoku', this.username);
+		new Chat(chat_input, chat_output, 'sudoku', this.game.username);
 	}
 	create_lobby_buttons(){
 		// level and start
