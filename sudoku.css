@@ -52,7 +52,7 @@ th, input {
     color: rgba(129, 69, 0, 1);
 }
 input {
-	caret-color: blue;
+	caret-color: black;
 }
 th:first-child {
     border-top-left-radius: 5px;
