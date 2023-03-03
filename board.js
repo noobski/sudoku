@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-magic-numbers */
-/* global running_local */
+/* global running_local Chat */
 class Board{
 	constructor(){
 		// check if running on mobile device that requires resizing of board
@@ -15,6 +15,18 @@ class Board{
 		this.create_lobby_buttons();
 		this.create_game_buttons();
 		this.create_high_score_list();
+		this.start_chat();
+	}
+	start_chat(){
+		const chat_input = document.getElementById('chat_input');
+		chat_input.style.width = this.cell_w*9;
+		chat_input.style.height = this.cell_w*1;
+		chat_input.style.fontSize = 55;
+		const chat_output = document.getElementById('chat_output');
+		chat_input.style.width = this.cell_w*9;
+		chat_input.style.height = this.cell_w*4;
+		chat_input.style.fontSize = 55;
+		new Chat(chat_input, chat_output, 'sudoku', this.username);
 	}
 	create_lobby_buttons(){
 		// level and start
