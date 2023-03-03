@@ -57,7 +57,7 @@ class Board{
 		e.appendChild(create_element('br'));
 		// share buttons
 		const btn = create_element('button', {innerHTML: 'Invite a friend',
-			style: 'height:'+this.t_cell_h*0.8+'; width:'+this.t_cell_h*9.3+
+			style: 'height:'+this.t_cell_h*0.8+'; width:'+this.t_cell_h*9.8+
 			'; font-size:'+this.font_size, class:'share_button'});
 		const msg = 'I challenge you to Sudoku at http://poco.la/sudoku !';
 		btn.onclick = (e) =>
