@@ -18,11 +18,12 @@ class Board{
 		this.start_chat();
 	}
 	start_chat(){
-		const chat_input = document.getElementById('chat_input');
+		const chat_container = document.getElementById('chat_container');
+		const chat_input = document.createElement('input');
+		const chat_output = document.createElement('ul');
 		chat_input.style.width = this.cell_w*9;
 		chat_input.style.height = this.cell_w*1;
 		chat_input.style.fontSize = this.font_size;
-		const chat_output = document.getElementById('chat_output');
 		chat_output.style.width = this.cell_w*9;
 		chat_output.style.height = this.cell_w*4;
 		chat_output.style.fontSize = this.font_size;
