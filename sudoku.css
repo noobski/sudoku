@@ -51,6 +51,9 @@ th, input {
     padding: 10px 20px;
     color: rgba(129, 69, 0, 1);
 }
+input {
+	caret-color: blue;
+}
 th:first-child {
     border-top-left-radius: 5px;
 }
