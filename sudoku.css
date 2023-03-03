@@ -75,6 +75,10 @@ tr td:last-child {
     background-color: white;
     text-align: center;
 }
+ul {
+    color: rgb(88, 140, 185);
+    background-color: white;
+}
 .msg {
     color: rgb(200,200,200);
     text-align: center;
