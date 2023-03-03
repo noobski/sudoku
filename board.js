@@ -29,6 +29,7 @@ class Board{
 			e.style.fontSize = this.font_size;
 		});
 		new Chat(chat_input, chat_output, 'sudoku', this.game.username);
+		chat_input.focus();
 	}
 	create_lobby_buttons(){
 		// level and start
