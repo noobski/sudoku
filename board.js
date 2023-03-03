@@ -23,9 +23,9 @@ class Board{
 		const chat_output = document.createElement('ul');
 		[chat_input, chat_output].forEach((e, i) => {
 			chat_container.appendChild(e);
-			chat_input.style.width = this.cell_w*9;
-			chat_input.style.height = this.cell_w*(i==1 ? 1:3);
-			chat_input.style.fontSize = this.font_size;
+			e.style.width = this.cell_w*9;
+			e.style.height = this.cell_w*(i==0 ? 1:3);
+			e.style.fontSize = this.font_size;
 		});
 		new Chat(chat_input, chat_output, 'sudoku', this.username);
 	}
