@@ -2,7 +2,8 @@
 /* eslint-disable no-magic-numbers */
 /* global running_local Chat */
 class Board{
-	constructor(){
+	constructor(game){
+		this.game = game;
 		// check if running on mobile device that requires resizing of board
 		this.using_mobile =  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 		// accomodate mobile
@@ -43,13 +44,13 @@ class Board{
 				clicked ? '' : b.classList.add('highlighted_button');
 				const action = clicked ? '(reset)' : l.toLowerCase();
 				b.dataset.clicked = !clicked;
-				game.comms.send_desired_level(action);
+				this.game.comms.send_desired_level(action);
 			};
 			if(l=='Start!')
 			{
 				btn.style.backgroundColor='grey';
 				btn.style.color='black';
-				btn.onclick = () => game.comms.ask_to_start_now();
+				btn.onclick = () => this.game.comms.ask_to_start_now();
 			}
 			e.appendChild(btn);
 		});
@@ -91,7 +92,7 @@ class Board{
 		innerHTML: 'Quit', class: 'regular_button'});
 		btn.onclick = ()=> {
 			btn.innerHTML = btn.innerHTML=='Quit' ? 'Back to lobby' : 'Quit';
-			game.game_button_pressed();
+			this.game.game_button_pressed();
 		};
 		e.appendChild(btn);
 	}
@@ -128,7 +129,7 @@ class Board{
 		container.appendChild(table_e);
 		// create top caption
 		table_e.appendChild(create_element('caption',
-			{innerHTML: game.level.toUpperCase(),
+			{innerHTML: this.game.level.toUpperCase(),
 				style: 'font-size: '+this.font_size}));
 		// create the cells of the table (by 3 colgroups separately)
 		for(let i=0; i<3; i++)
@@ -222,7 +223,7 @@ class Board{
 				const cell = create_element('td',
 					{style: 'height: '+this.cell_w*0.7+'; font-size: '
 					+this.cell_w*0.4+'; background: '+(p.strikes<3 ? 'rgb(230,230,230)' : 'red'), innerHTML: t});
-				if(p.username==game.username)
+				if(p.username==this.game.username)
 				{
 					// highlight this player's entry differently
 					cell.style.background = 'rgba(255,137,0,0.4)';
@@ -258,9 +259,9 @@ class Board{
 				const style = 'padding: 5px 5px; color: rgba(0, 0, 0, 0.6); height:'
 					+ this.t_cell_h+'; font-size:'+this.font_size +
 					'; font-align: center; background: '+
-					(p.username==game.username ?
+					(p.username==this.game.username ?
 						'rgba(255,137,0,0.4)' : 'rgb(230,230,230)') +
-					'; font-weight: '+ (t==game.user.desired_level ? 'bold':'');
+					'; font-weight: '+ (t==this.game.user.desired_level ? 'bold':'');
 				const content = t==p.desired_level && t ? t[0].toUpperCase()+t.slice(1) : t;
 				row.appendChild(create_element('td',
 					{innerHTML: content, style: style}));
@@ -333,7 +334,7 @@ class Board{
 		}
 		this.reset_all_cell_backgrounds();
 		// let the other players know my game status
-		game.comms.send_board(this.show, this.squares_left(), this.strikes);
+		this.game.comms.send_board(this.show, this.squares_left(), this.strikes);
 	}
 	erase_strike_cells(){
 		this.strike_cells.forEach(c => c.innerHTML = '');

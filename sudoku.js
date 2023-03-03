@@ -1,4 +1,5 @@
-let game = new Game();
+/* global Game */
+new Game();
 
 
 

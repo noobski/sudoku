@@ -8,7 +8,7 @@ class Game {
 		// setup comms
 		this.comms = new Comms(this);
 		// setup players board
-		this.players = new Players();
+		this.players = new Players(this);
 		this.board = new Board(this);
 		// set initial game state
 		this.set_state('waiting');

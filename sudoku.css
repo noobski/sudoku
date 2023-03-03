@@ -13,7 +13,7 @@ body {
     border-radius: 9px;
     border: 1px solid rgba(255,137,0,0.2);
     margin: 1px;
-    margin-right = 8px;
+    margin-right: 8px;
     box-shadow: 2px 2px 5px 0 rgba(200,200,200,.3); /* Add a shadow to the button */
 
 }
