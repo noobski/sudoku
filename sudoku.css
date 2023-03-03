@@ -6,7 +6,7 @@
 body {
     background: rgba(50,50,50,1);
 }
-.regular_button, .highlighted_button, .share_button, .activated_share, ul {
+.regular_button, .highlighted_button, .share_button, .activated_share {
     font-weight: bold;
     background: black;
     color: rgba(120,120,120,1);
