@@ -21,11 +21,11 @@ class Board{
 		const chat_input = document.getElementById('chat_input');
 		chat_input.style.width = this.cell_w*9;
 		chat_input.style.height = this.cell_w*1;
-		chat_input.style.fontSize = 55;
+		chat_input.style.fontSize = this.font_size;
 		const chat_output = document.getElementById('chat_output');
 		chat_output.style.width = this.cell_w*9;
 		chat_output.style.height = this.cell_w*4;
-		chat_output.style.fontSize = 55;
+		chat_output.style.fontSize = this.font_size;
 		new Chat(chat_input, chat_output, 'sudoku', this.username);
 	}
 	create_lobby_buttons(){
