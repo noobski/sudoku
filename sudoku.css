@@ -79,6 +79,9 @@ tr td:last-child {
     text-align: center;
 }
 ul {
+	/* make the bottom edges of the lu box rounded 3px */
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
     color: rgb(88, 140, 185);
     background-color: white;
 }
