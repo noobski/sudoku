@@ -53,6 +53,8 @@ th, input {
 }
 input {
 	/* top left and right edges rounded 8px */
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
 	caret-color: black;
 }
 th:first-child {
