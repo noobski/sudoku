@@ -52,6 +52,7 @@ th, input {
     color: rgba(129, 69, 0, 1);
 }
 input {
+	/* top left and right edges rounded 8px */
 	caret-color: black;
 }
 th:first-child {
@@ -79,7 +80,6 @@ tr td:last-child {
     text-align: center;
 }
 ul {
-	/* make the bottom edges of the lu box rounded 3px */
 	border-bottom-left-radius: 3px;
 	border-bottom-right-radius: 3px;
     color: rgb(88, 140, 185);
