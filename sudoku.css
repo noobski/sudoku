@@ -52,9 +52,8 @@ th, input {
     color: rgba(129, 69, 0, 1);
 }
 input {
-	/* top left and right edges rounded 8px */
-	border-top-left-radius: 8px;
-	border-top-right-radius: 8px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 	caret-color: black;
 }
 th:first-child {
@@ -82,8 +81,8 @@ tr td:last-child {
     text-align: center;
 }
 ul {
-	border-bottom-left-radius: 3px;
-	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
     color: rgb(88, 140, 185);
     background-color: white;
 }
