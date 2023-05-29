@@ -1,4 +1,4 @@
-/* global Board Players Comms Chat */
+/* global Board Players Comms */
 // eslint-disable-next-line no-unused-vars
 class Game {
 	constructor(){

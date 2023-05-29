@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-magic-numbers */
-/* global running_local Chat */
+/* global running_local */
 class Board{
 	constructor(game){
 		this.game = game;
@@ -16,20 +16,6 @@ class Board{
 		this.create_lobby_buttons();
 		this.create_game_buttons();
 		this.create_high_score_list();
-		this.start_chat();
-	}
-	start_chat(){
-		const chat_container = document.getElementById('chat_container');
-		const chat_input = document.createElement('input');
-		const chat_output = document.createElement('ul');
-		[chat_input, chat_output].forEach((e, i) => {
-			chat_container.appendChild(e);
-			e.style.width = this.cell_w*9;
-			e.style.height = this.cell_w*(i==0 ? 1:3);
-			e.style.fontSize = this.font_size;
-		});
-		new Chat(chat_input, chat_output, 'sudoku', this.game.username, 'Message to your friends....');
-		chat_input.focus();
 	}
 	create_lobby_buttons(){
 		// level and start
