@@ -49,8 +49,7 @@ class Comms {
 		});
 		s.on('dbg', (msg) => console.table(msg));
 		s.on('nasty_message', (msg) => {
-			console.log('nasty_message received: '+msg);
-			g.board.msg(msg,'!');
+			g.board.msg(msg);
 		});
 	}
 	send_board(show, sq_left, strikes){
