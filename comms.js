@@ -33,8 +33,8 @@ class Comms {
 			g.board.show_countdown(time));
 		s.on('start', (board_array, board_show, board_level, players) =>
 			g.start(board_array, board_show, board_level, players));
-		s.on('board', (username, sq_left, strikes, show) =>
-			g.players.update(username, sq_left, strikes, show));
+		s.on('board', (username, sq_left, strikes) =>
+			g.players.update(username, sq_left, strikes));
 		s.on('you_won', (reason) => g.game_over(true, reason));
 		s.on('you_lost', (reason) => g.game_over(false, reason));
 		s.on('new_high_score', (score, level) =>
@@ -48,9 +48,13 @@ class Comms {
 			document.body.innerHTML='<br><br><h2 style="text-align: center; color: white">Another user is playing with same user name. <br><br>Refresh to play again</h2>';
 		});
 		s.on('dbg', (msg) => console.table(msg));
+		s.on('nasty_message', (msg) => {
+			console.log('nasty_message received: '+msg);
+			g.board.msg(msg,'!');
+		});
 	}
 	send_board(show, sq_left, strikes){
-		this.s.emit('board', show, sq_left, strikes);
+		this.s.emit('board', sq_left, strikes);
 	}
 	send_username(username){
 		this.s.emit('username', username);
